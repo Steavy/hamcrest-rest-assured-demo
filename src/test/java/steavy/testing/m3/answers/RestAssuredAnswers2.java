@@ -23,8 +23,8 @@ public class RestAssuredAnswers2 {
 	 ******************************************************/
 
 	@DataProvider(name = "circuits")
-	public String[][] createCircuitData() {
-		return new String[][] {
+	public Object[][] createCircuitData() {
+		return new Object[][] {
 				{ "monza", "Italy" },
 				{ "spa", "Belgium" },
 				{ "sepang", "Malaysia" }
