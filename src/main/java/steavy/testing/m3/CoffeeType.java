@@ -1,4 +1,4 @@
-package com.monotonic.testing.m3;
+package steavy.testing.m3;
 
 /**
  * Describes the type of coffee that we're going to serve.

@@ -1,12 +1,12 @@
-package com.monotonic.testing.m3.unittest;
+package steavy.testing.m3.unittest;
 
-import com.monotonic.testing.m3.Cafe;
-import com.monotonic.testing.m3.Coffee;
+import steavy.testing.m3.Cafe;
+import steavy.testing.m3.Coffee;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.monotonic.testing.m3.CoffeeType.Espresso;
-import static com.monotonic.testing.m3.CoffeeType.Latte;
+import static steavy.testing.m3.CoffeeType.Espresso;
+import static steavy.testing.m3.CoffeeType.Latte;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertEquals;

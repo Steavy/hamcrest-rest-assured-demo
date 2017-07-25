@@ -1,4 +1,4 @@
-package com.monotonic.testing.m3.exercises;
+package steavy.testing.m3.exercises;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -7,14 +7,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class RestAssuredExamplesParameterPassing {
-	
+
 	private String accessToken;
-	
+
 	@BeforeClass
 	public void useBasicAuthentication() {
-		
+
 		accessToken =
-		
+
 		given().
 			params("grant_type","client_credentials").
 			auth().
@@ -26,10 +26,10 @@ public class RestAssuredExamplesParameterPassing {
 			extract().
 			path("access_token");
 	}
-	
+
 	@Test
 	public void useOAuth2Authentication() {
-		
+
 		given().
 			auth().
 			oauth2(accessToken).

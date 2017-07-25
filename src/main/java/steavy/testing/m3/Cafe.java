@@ -1,4 +1,4 @@
-package com.monotonic.testing.m3;
+package steavy.testing.m3;
 
 /**
  * A coffee shop that can brew coffee and maintains an internal stock of beans and milk.

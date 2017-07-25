@@ -1,4 +1,4 @@
-package com.monotonic.testing.m3.unittest;
+package steavy.testing.m3.unittest;
 
 import org.junit.Test;
 

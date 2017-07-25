@@ -1,4 +1,4 @@
-package com.monotonic.testing.m3.exercises;
+package steavy.testing.m3.exercises;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -10,10 +10,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class RestAssuredExamples {
-	
+
 	@Test
 	public void validateCountryForZipCode() {
-						
+
 		given().
 		when().
 			get("http://localhost:8080/us/90210").
@@ -21,7 +21,7 @@ public class RestAssuredExamples {
 			assertThat().
 			body("country", equalTo("United States"));
 	}
-	
+
 	@Test
 	public void useQueryParametersSingleTestcase() {
 
@@ -43,7 +43,7 @@ public class RestAssuredExamples {
 		then().
 			body("current.city.country",equalTo("Denmark"));
 	}
-	
+
 	@Test
 	public void useSinglePathParameter() {
 
@@ -52,16 +52,16 @@ public class RestAssuredExamples {
 		when().
 			get("http://ergast.com/api/f1/drivers/{driverName}.json").
 		then()
-			.body("MRData.DriverTable.Drivers.permanentNumber[0]",equalTo("33"));			
+			.body("MRData.DriverTable.Drivers.permanentNumber[0]",equalTo("33"));
 	}
-	
+
 	private String accessToken;
-	
+
 	@BeforeClass
 	public void useBasicAuthentication() {
-		
+
 		accessToken =
-		
+
 		given().
 			params("grant_type","client_credentials").
 			auth().
@@ -73,10 +73,10 @@ public class RestAssuredExamples {
 			extract().
 			path("access_token");
 	}
-	
+
 	@Test
 	public void useOAuth2Authentication() {
-		
+
 		given().
 			auth().
 			oauth2(accessToken).
@@ -86,18 +86,18 @@ public class RestAssuredExamples {
 			assertThat().
 			body("",hasKey("user_id"));
 	}
-	
+
 	@Test
 	public void useResponseSpecBuilder() {
-		
+
 		ResponseSpecBuilder rsBuilder = new ResponseSpecBuilder();
-		
+
 		rsBuilder.
 			expectStatusCode(200).
 				expectContentType(ContentType.JSON);
-		
+
 		ResponseSpecification respSpec = rsBuilder.build();
-		
+
 		given().
 		when().
 			get("http://localhost:8080/us/90210").
