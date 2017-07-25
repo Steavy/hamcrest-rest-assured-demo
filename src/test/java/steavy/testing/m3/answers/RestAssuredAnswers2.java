@@ -2,6 +2,7 @@ package steavy.testing.m3.answers;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+
 import io.restassured.RestAssured;
 
 import org.testng.annotations.BeforeClass;
@@ -24,10 +25,21 @@ public class RestAssuredAnswers2 {
 
 	@DataProvider(name = "circuits")
 	public Object[][] createCircuitData() {
-		return new Object[][] {
-				{ "monza", "Italy" },
-				{ "spa", "Belgium" },
-				{ "sepang", "Malaysia" }
+		return new Object[][]{
+			{"monza", "Italy"},
+			{"spa", "Belgium"},
+			{"sepang", "Malaysia"},
+			{"nurburgring", "Germany"}
+		};
+	}
+
+	@DataProvider(name = "circuitsLocality")
+	public Object[][] createCircuitLocalityData() {
+		return new Object[][]{
+			{"monza", "Monza"},
+			{"spa", "Spa"},
+			{"sepang", "Kuala Lumpur"},
+			{"nurburgring", "Nürburgring"}
 		};
 	}
 
@@ -40,11 +52,11 @@ public class RestAssuredAnswers2 {
 
 	@DataProvider(name = "pitstops")
 	public Object[][] createPitstopData() {
-		return new Object[][] {
-				{ "1", 1 },
-				{ "2", 3 },
-				{ "3", 2 },
-				{ "4", 2 }
+		return new Object[][]{
+			{"1", 1},
+			{"2", 3},
+			{"3", 2},
+			{"4", 2}
 		};
 	}
 
@@ -59,11 +71,27 @@ public class RestAssuredAnswers2 {
 
 		given().
 			pathParam("circuitName", circuitName).
-		when().
+			when().
 			get("/api/f1/circuits/{circuitName}.json").
-		then().
+			then().
 			assertThat().
-			body("MRData.CircuitTable.Circuits.Location[0].country",equalTo(circuitCountry));
+			body("MRData.CircuitTable.Circuits.Location[0].country", equalTo(circuitCountry));
+	}
+
+	/*******************************************************
+	 * Request the locality of each track
+	 ******************************************************/
+
+	@Test(dataProvider = "circuitsLocality")
+	public void checkTheLocalityOfEachTrack(String circuitName, String locality) {
+
+		given().
+			pathParam("circuitName", circuitName).
+			when().
+			get("/api/f1/circuits/{circuitName}.json").
+			then().
+			assertThat().
+			body("MRData.CircuitTable.Circuits.Location[0].locality", equalTo(locality));
 	}
 
 	/*******************************************************
@@ -78,10 +106,12 @@ public class RestAssuredAnswers2 {
 
 		given().
 			pathParam("raceNumber", raceNumber).
-		when().
+			when().
 			get("/api/f1/2015/{raceNumber}/drivers/max_verstappen/pitstops.json").
-		then().
+			then().
 			assertThat().
-			body("MRData.RaceTable.Races[0].PitStops",hasSize(numberOfPitstops));
+			body("MRData.RaceTable.Races[0].PitStops", hasSize(numberOfPitstops));
 	}
+
+
 }
