@@ -15,7 +15,7 @@ public class RestAssuredExercises3 {
 	@BeforeClass
 	public void initPath() {
 
-		RestAssured.baseURI = "http://localhost:9876";
+		RestAssured.baseURI = "http://localhost:8080";
 	}
 
 	/*******************************************************

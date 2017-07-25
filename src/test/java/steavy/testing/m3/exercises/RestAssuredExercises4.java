@@ -23,7 +23,7 @@ public class RestAssuredExercises4 {
 	@BeforeClass
 	public void retrieveOAuthToken() {
 
-		RestAssured.baseURI = "http://localhost:9876";
+		RestAssured.baseURI = "http://localhost:8080";
 
 		given().
 		when().
