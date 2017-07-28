@@ -43,6 +43,20 @@ public class RestAssuredAnswers2 {
 		};
 	}
 
+	@DataProvider(name = "circuitIdData")
+	public Object[][] createCircuitIdData() {
+		return new Object[][]{
+			{0, "albert_park"},
+			{1, "americas"},
+			{2, "hockenheimring"},
+			{3, "hungaroring"},
+			{4, "monaco"},
+			{5, "monza"},
+			{6, "silverstone"},
+			{7, "spa"}
+		};
+	}
+
 	/*******************************************************
 	 * Create a DataProvider that specifies for all races
 	 * (adding the first four suffices) in 2015 how many
@@ -92,6 +106,21 @@ public class RestAssuredAnswers2 {
 			then().
 			assertThat().
 			body("MRData.CircuitTable.Circuits.Location[0].locality", equalTo(locality));
+	}
+
+	/*******************************************************
+	 * Request the locationId of each race in 2014
+	 ******************************************************/
+
+	@Test(dataProvider = "circuitIdData")
+	public void checkEachRaceOf2014WasAt(int circuitNr, String circuitName) {
+
+		given().
+			when().
+			get("/api/f1/2014/circuits.json").
+			then().
+			assertThat().
+			body("MRData.CircuitTable.Circuits[" + (circuitNr) + "].circuitId", equalTo((circuitName)));
 	}
 
 	/*******************************************************

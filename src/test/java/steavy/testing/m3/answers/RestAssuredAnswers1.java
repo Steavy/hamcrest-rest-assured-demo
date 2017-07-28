@@ -82,6 +82,17 @@ public class RestAssuredAnswers1 {
 			body("MRData.CircuitTable.Circuits.circuitId[0]", equalTo("albert_park"));
 	}
 
+	@Test
+	public void checkTheSecondRaceOf2014WasAtAmericas() {
+
+		given().
+			when().
+			get("/api/f1/2014/circuits.json").
+			then().
+			assertThat().
+			body("MRData.CircuitTable.Circuits[1].circuitId", equalTo("americas"));
+	}
+
 	/***********************************************
 	 * Retrieve the list of circuits for the 2014
 	 * season and check that it contains silverstone
